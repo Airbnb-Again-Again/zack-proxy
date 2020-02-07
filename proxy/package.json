@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ../modules/air-carousel/server/index.js & node ../modules/Related-Homes/server/index.js & node ./server/index.js & node ../modules/reviews/server/index.js & node ../modules/scheduling/server/index.js"
   },
   "keywords": [],
   "author": "",
