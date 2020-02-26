@@ -1,3 +1,5 @@
+require('newrelic');
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -29,7 +31,24 @@ app.get('/v1/api/:accommodationId/reviews', (req,res) => {
 });
 
 app.get('/getHomes', (req,res) => {
-  axios.get('http://localhost:4321' + req.url)
+  // axios.get('http://localhost:4321' + req.url)
+  let zip = req.query.zip
+  console.log(zip);
+  axios.get('http://localhost:4321/related-homes/getHomes')
+    .then((innerRes) => {
+      res.writeHead(200);
+      res.write(JSON.stringify(innerRes.data));
+      res.end();
+    })
+    .catch((err) => {
+      res.writeHead(500);
+      res.end()
+      console.log(err);
+    });
+});
+
+app.post('/getHomes/newListing', (req,res) => {
+  axios.post('http://localhost:4321/related-homes/newListing')
     .then((innerRes) => {
       res.writeHead(200);
       res.write(JSON.stringify(innerRes.data));
